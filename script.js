@@ -1,12 +1,18 @@
 /* ============================================================
-   ТВОИ КАРТИНКИ
+   ТВОИ КАРТИНКИ (без папки images)
    ============================================================ */
 const IMAGES = {
-  bedrock: 'images/bedrock.png',
+  bedrock: 'bedrock.png',
   weapons: [
-    'images/wood.png', 'images/stone.png', 'images/iron.png',
-    'images/gold.png', 'images/diamond.png', 'images/netherite.png',
-    '', '', ''
+    'wood.png',      // 0: Деревянный
+    'stone.png',     // 1: Каменный
+    'iron.png',      // 2: Железный
+    'gold.png',      // 3: Золотой
+    'diamond.png',   // 4: Алмазный
+    'netherite.png', // 5: Незеритовый
+    '',              // 6: Кирка богов (будет эмодзи)
+    '',              // 7: Разрушитель миров (будет эмодзи)
+    '',              // 8: Абсолют (будет эмодзи)
   ],
   upgrades: { dmg: '', auto: '', crit: '', coin: '' },
   donation: { blessing: '', thor: '', ender: '', midas: '', dragon: '', infinity: '' },
@@ -44,7 +50,7 @@ const DONATION = [
 ];
 
 /* ============================================================
-   ХЕЛПЕР: иконки и читы
+   ХЕЛПЕРЫ
    ============================================================ */
 function iconHTML(imgSrc, emoji){
   if (imgSrc){
@@ -54,7 +60,6 @@ function iconHTML(imgSrc, emoji){
   return `<span class="emoji">${emoji}</span>`;
 }
 
-// Глобальные переменные для админки
 let adminDamageMult = 1;
 
 /* ============================================================
@@ -85,7 +90,7 @@ function baseDamage(){
   d *= 1 + 0.20 * state.upg.dmg;
   if (state.don.blessing) d *= 2;
   if (state.don.infinity) d *= 3;
-  return d * adminDamageMult; // <--- Админский множитель
+  return d * adminDamageMult;
 }
 function critChance(){
   return Math.min(0.95, 0.03 * state.upg.crit + (state.don.ender ? 0.20 : 0));
@@ -378,7 +383,6 @@ window.buyDonation = buyDonation;
 /* ============================================================
    АДМИН-ПАНЕЛЬ И АБЬЮЗ
    ============================================================ */
-$('#adminBtn').addEventListener('click', toggleAdmin);
 window.toggleAdmin = function() {
   $('#adminOverlay').classList.toggle('show');
 };
@@ -427,6 +431,8 @@ window.adminSetDmgMult = function(mult) {
   toast('👑 Админ: Множитель урона x' + (mult > 1000 ? '∞' : mult));
   updateUI();
 };
+
+$('#adminBtn').addEventListener('click', () => window.toggleAdmin());
 
 /* ============================================================
    ТАБЫ / ДОНАТ / СБРОС
