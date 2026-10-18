@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bedrock Breaker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="stat coins"><span class="ico">🪙</span><span id="uiCoins">0</span></div>
+  <div class="stat gems"><span class="ico">💎</span><span id="uiGems">0</span></div>
+  <div class="stat dmg"><span class="ico">💥</span><span id="uiDmg">1</span></div>
+  <div class="stat weap"><span class="ico">⚔️</span><span id="uiWeapon">Деревянный меч</span></div>
+  <div class="spacer"></div>
+  <button class="btn" id="adminBtn" style="background:#450a0a; border-color:#7f1d1d; color:#fca5a5;">👑 Админ</button>
+  <button class="btn" id="resetBtn">Сброс</button>
+</div>
+
+<div class="game">
+  <div class="arena">
+    <div class="level-label">Бедрок &nbsp;ур.&nbsp;<b id="uiLevel">1</b></div>
+
+    <div class="bedrock-stage">
+      <div class="bedrock-glow"></div>
+      <div class="bedrock" id="bedrock">
+        <img class="bedrock-img" id="bedrockImg" alt="Бедрок">
+        <div class="cracks" id="cracks"></div>
+        <div class="pick">⛏️</div>
+      </div>
+      <div class="fx" id="fx"></div>
+    </div>
+
+    <div class="hpwrap">
+      <div class="hpbar">
+        <div class="hpfill" id="hpfill"></div>
+        <div class="hptext" id="hptext">10 / 10</div>
+      </div>
+    </div>
+
+    <div class="hint">Кликай по бедроку, чтобы сломать его &nbsp;•&nbsp; сломано: <b id="uiBroken">0</b></div>
+  </div>
+
+  <aside class="shop">
+    <div class="tabs">
+      <button class="tab active" data-tab="weapons">⚔️ Арсенал</button>
+      <button class="tab" data-tab="upgrades">⚙️ Улучшения</button>
+      <button class="tab" data-tab="donate">💎 Донат</button>
+    </div>
+
+    <div class="shop-items" id="shopItems"></div>
+
+    <div class="shop-footer">
+      <button class="btn buy gem" id="donateBtn" style="width:100%">
+        💎 Задонатить +100 (симуляция)
+      </button>
+      <div class="donate-note">
+        Это демо-игра. Кнопка доната <b>не списывает реальные деньги</b>.
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- АДМИН ПАНЕЛЬ -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel">
+    <button class="btn admin-close" onclick="toggleAdmin()">✖</button>
+    <h2>👑 Админ-Абьюз</h2>
+    <p style="font-size:12px; margin-bottom:15px; color:#f87171;">Панель для читов и тестов игры</p>
+    
+    <div class="admin-grid">
+      <button class="btn" onclick="adminAddCoins(1000000)">🪙 +1M Монет</button>
+      <button class="btn" onclick="adminAddGems(1000)">💎 +1000 Гемов</button>
+      <button class="btn" onclick="adminKillBedrock()">💥 Сломать Бедрок</button>
+      <button class="btn" onclick="adminMaxAll()">🌟 Прокачать Всё</button>
+      <button class="btn" onclick="adminSetLevel(50)">Ур. 50</button>
+      <button class="btn" onclick="adminSetLevel(100)">Ур. 100</button>
+      <button class="btn" onclick="adminSetLevel(500)">Ур. 500</button>
+      <button class="btn" onclick="adminSetLevel(1)">Ур. 1</button>
+    </div>
+
+    <hr style="border-color:#7f1d1d; margin: 15px 0;">
+    <h3 style="font-size:14px; margin-bottom:10px;">Множитель урона</h3>
+    <div class="admin-grid">
+      <button class="btn" onclick="adminSetDmgMult(1)">x1 (Норм)</button>
+      <button class="btn" onclick="adminSetDmgMult(10)">x10</button>
+      <button class="btn" onclick="adminSetDmgMult(100)">x100</button>
+      <button class="btn" onclick="adminSetDmgMult(999999)">x∞ (Ваншот)</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
